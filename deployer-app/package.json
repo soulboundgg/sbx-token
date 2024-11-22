@@ -1,0 +1,21 @@
+{
+  "name": "deployer-app",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@types/readline-sync": "^1.4.8",
+    "dotenv": "^16.4.5",
+    "readline-sync": "^1.4.10",
+    "viem": "^2.21.49"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.1"
+  }
+}

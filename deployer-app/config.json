@@ -1,0 +1,20 @@
+{
+  "chains": [
+    {
+      "description": "Base sepolia testnet",
+      "chainId": 84532,
+      "rpc": "https://base-sepolia-rpc.publicnode.com",
+      "tokenBridge": "0x86F55A04690fd7815A3D802bD587e83eA888B239",
+      "wormholeRelayer": "0x93BAD53DDfB6132b0aC8E37f6029163E63372cEE",
+      "wormhole": "0x79A1027a6A159502049F10906D333EC57E95F083"
+    },
+    {
+      "description": "Arbitrum sepolia Testnet",
+      "chainId": 421614,
+      "rpc": "https://api.zan.top/arb-sepolia",
+      "tokenBridge": "0xC7A204bDBFe983FCD8d8E61D02b475D4073fF97e",
+      "wormholeRelayer": "0x7B1bD7a6b4E61c2a123AC6BC2cbfC614437D0470",
+      "wormhole": "0x6b9C8671cdDC8dEab9c719bB87cBd3e782bA6a35"
+    }
+  ]
+}
