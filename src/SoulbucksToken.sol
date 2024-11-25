@@ -1,15 +1,14 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.20;
+pragma solidity ^0.8.22;
 
-import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import {ERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
+import {OFT} from "@layerzerolabs/oft-evm/contracts/OFT.sol";
 
-contract SoulbucksToken is ERC20, ERC20Permit {
-    uint256 public constant MAX_SUPPLY = 1_000_000_000e18;
-    constructor(string memory _name, string memory _symbol, address _owner)
-        ERC20Permit(_name)
-        ERC20(_name, _symbol)
+contract SoulbucksToken is OFT {
+    constructor(string memory _name, string memory _symbol, address _lzEndpoint, address _delegate)
+        OFT(_name, _symbol, _lzEndpoint, _delegate)
+        Ownable(_delegate)
     {
-        _mint(_owner, MAX_SUPPLY);
+        _mint(_delegate, 1_000_000_000 * 1e18);
     }
 }

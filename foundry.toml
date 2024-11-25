@@ -5,3 +5,11 @@ libs = ["lib"]
 via-ir = true
 
 # See more config options https://github.com/foundry-rs/foundry/blob/master/crates/config/README.md#all-options
+remappings = [
+  '@openzeppelin/contracts/=lib/openzeppelin-contracts/contracts/',
+  'ds-test/=lib/wormhole-solidity-sdk/lib/forge-std/lib/ds-test/src/',
+  'erc4626-tests/=lib/openzeppelin-contracts/lib/erc4626-tests/',
+  'forge-std/=lib/forge-std/src/',
+  '@layerzerolabs/oft-evm/=lib/devtools/packages/oft-evm/',
+  '@layerzerolabs/lz-evm-protocol-v2/=lib/layerzero-v2/packages/layerzero-v2/evm/protocol',
+]
