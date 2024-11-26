@@ -21,6 +21,9 @@
     "ethers": "^5.7.2",
     "hardhat-deploy": "^0.12.1"
   },
+  "dependencies": {
+    "@layerzerolabs/devtools-evm-hardhat": "^0.3.26"
+  },
   "devDependencies": {
     "@babel/core": "^7.23.9",
     "@layerzerolabs/eslint-config-next": "~2.3.3",
@@ -73,8 +76,5 @@
     "@nomicfoundation/edr": "0.3.5",
     "ethers": "^5.7.2",
     "hardhat-deploy": "^0.12.1"
-  },
-  "dependencies": {
-    "@layerzerolabs/devtools-evm-hardhat": "^0.3.26"
   }
 }
