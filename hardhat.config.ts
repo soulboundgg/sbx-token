@@ -37,6 +37,23 @@ if (accounts == null) {
 	);
 }
 
+const ETHEREUM_API_KEY = process.env.ETHEREUM_API_KEY;
+const BASE_API_KEY = process.env.BASE_API_KEY;
+
+const apiKey =
+	ETHEREUM_API_KEY === undefined || BASE_API_KEY === undefined
+		? undefined
+		: {
+				ethereum: ETHEREUM_API_KEY,
+				base: BASE_API_KEY,
+			};
+
+if (apiKey === null) {
+	console.warn(
+		"Could not find ETHEREUM_API_KEY or BASE_API_KEY environment variables. It will not be possible to execute transactions in your example.",
+	);
+}
+
 const config: HardhatUserConfig = {
 	paths: {
 		cache: "cache/hardhat",
@@ -67,10 +84,7 @@ const config: HardhatUserConfig = {
 		},
 	},
 	etherscan: {
-		apiKey: {
-			arbitrumOne: "YOUR_API_KEY",
-			base: "YOUR_API_KEY",
-		},
+		apiKey,
 	},
 	namedAccounts: {
 		deployer: {
