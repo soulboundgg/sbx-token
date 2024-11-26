@@ -5,7 +5,7 @@ import { deployments, ethers } from "hardhat";
 
 import { Options } from "@layerzerolabs/lz-v2-utilities";
 
-describe("Soulbucks Test", function () {
+describe("Soulbucks Test", () => {
 	// Constant representing a mock Endpoint ID for testing purposes
 	const eidA = 1;
 	const eidB = 2;
@@ -21,7 +21,7 @@ describe("Soulbucks Test", function () {
 	let mockEndpointV2B: Contract;
 
 	// Before hook for setup that runs once before all tests in the block
-	before(async function () {
+	before(async () => {
 		// Contract factory for our tested contract
 		//
 		// We are using a derived contract that exposes a mint() function for testing purposes
@@ -51,7 +51,7 @@ describe("Soulbucks Test", function () {
 	});
 
 	// beforeEach hook for setup that runs before each test in the block
-	beforeEach(async function () {
+	beforeEach(async () => {
 		// Deploying a mock LZEndpoint with the given Endpoint ID
 		mockEndpointV2A = await EndpointV2Mock.deploy(eidA);
 		mockEndpointV2B = await EndpointV2Mock.deploy(eidB);
@@ -90,8 +90,10 @@ describe("Soulbucks Test", function () {
 	});
 
 	// A test case to verify token transfer functionality
-	it("should send a token from A address to B address via each OFT", async function () {
+	it("should send a token from A address to B address via each OFT", async () => {
 		// Minting an initial amount of tokens to ownerA's address in the myOFTA contract
+		const startingBalanceA = await myOFTA.balanceOf(ownerA.address);
+		const startingBalanceB = await myOFTB.balanceOf(ownerB.address);
 		const initialAmount = ethers.utils.parseEther("100");
 		await myOFTA.mint(ownerA.address, initialAmount);
 
@@ -126,8 +128,14 @@ describe("Soulbucks Test", function () {
 		const finalBalanceA = await myOFTA.balanceOf(ownerA.address);
 		const finalBalanceB = await myOFTB.balanceOf(ownerB.address);
 
-		// Asserting that the final balances are as expected after the send operation
-		expect(finalBalanceA).eql(initialAmount.sub(tokensToSend));
-		expect(finalBalanceB).eql(tokensToSend);
+		// Calculate the expected balances
+		const expectedBalanceA = startingBalanceA
+			.add(initialAmount)
+			.sub(tokensToSend);
+		const expectedBalanceB = startingBalanceB.add(tokensToSend);
+
+		// Compare the balances
+		expect(finalBalanceA.toString()).to.equal(expectedBalanceA.toString());
+		expect(finalBalanceB.toString()).to.equal(expectedBalanceB.toString());
 	});
 });
