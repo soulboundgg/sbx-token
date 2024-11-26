@@ -55,16 +55,14 @@ const config: HardhatUserConfig = {
 		],
 	},
 	networks: {
-		"base-sepolia-testnet": {
-			eid: EndpointId.BASESEP_V2_TESTNET,
-			url: process.env.RPC_URL_BASE || "https://sepolia.base.org",
+		ethereum: {
+			eid: EndpointId.ETHEREUM_V2_MAINNET,
+			url: process.env.RPC_URL_ETHEREUM || "https://ethereum.drpc.org",
 			accounts,
 		},
-		"amoy-testnet": {
-			eid: EndpointId.AMOY_V2_TESTNET,
-			url:
-				process.env.RPC_URL_AMOY ||
-				"https://polygon-amoy-bor-rpc.publicnode.com",
+		base: {
+			eid: EndpointId.BASE_V2_MAINNET,
+			url: process.env.RPC_URL_BASE || "https://base.drpc.org",
 			accounts,
 		},
 	},

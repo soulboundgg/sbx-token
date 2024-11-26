@@ -5,33 +5,33 @@ import type {
 	OmniPointHardhat,
 } from "@layerzerolabs/toolbox-hardhat";
 
-const amoyContract: OmniPointHardhat = {
-	eid: EndpointId.AMOY_V2_TESTNET,
+const ethereumContract: OmniPointHardhat = {
+	eid: EndpointId.ETHEREUM_V2_MAINNET,
 	contractName: "Soulbucks",
 };
 
-const baseSepoliaContract: OmniPointHardhat = {
-	eid: EndpointId.BASESEP_V2_TESTNET,
+const baseContract: OmniPointHardhat = {
+	eid: EndpointId.BASE_V2_MAINNET,
 	contractName: "Soulbucks",
 };
 
 const config: OAppOmniGraphHardhat = {
 	contracts: [
 		{
-			contract: amoyContract,
+			contract: ethereumContract,
 		},
 		{
-			contract: baseSepoliaContract,
+			contract: baseContract,
 		},
 	],
 	connections: [
 		{
-			from: amoyContract,
-			to: baseSepoliaContract,
+			from: ethereumContract,
+			to: baseContract,
 		},
 		{
-			from: baseSepoliaContract,
-			to: amoyContract,
+			from: baseContract,
+			to: ethereumContract,
 		},
 	],
 };
