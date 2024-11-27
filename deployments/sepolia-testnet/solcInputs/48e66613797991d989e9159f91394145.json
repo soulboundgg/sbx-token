@@ -116,10 +116,10 @@
       "content": "// SPDX-License-Identifier: MIT\n// OpenZeppelin Contracts (last updated v5.0.0) (utils/introspection/IERC165.sol)\n\npragma solidity ^0.8.20;\n\n/**\n * @dev Interface of the ERC165 standard, as defined in the\n * https://eips.ethereum.org/EIPS/eip-165[EIP].\n *\n * Implementers can declare support of contract interfaces, which can then be\n * queried by others ({ERC165Checker}).\n *\n * For an implementation, see {ERC165}.\n */\ninterface IERC165 {\n    /**\n     * @dev Returns true if this contract implements the interface defined by\n     * `interfaceId`. See the corresponding\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\n     * to learn more about how these ids are created.\n     *\n     * This function call must use less than 30 000 gas.\n     */\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\n}\n"
     },
     "contracts/mocks/SoulbucksMock.sol": {
-      "content": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity ^0.8.22;\r\n\r\nimport {Soulbucks} from \"../Soulbucks.sol\";\r\n\r\n// @dev WARNING: This is for testing purposes only\r\ncontract SoulbucksMock is Soulbucks {\r\n    constructor(string memory _name, string memory _symbol, address _lzEndpoint, address _delegate)\r\n        Soulbucks(_name, _symbol, _lzEndpoint, _delegate)\r\n    {}\r\n\r\n    function mint(address _to, uint256 _amount) public {\r\n        _mint(_to, _amount);\r\n    }\r\n}\r\n"
+      "content": "// SPDX-License-Identifier: UNLICENSED\r\npragma solidity ^0.8.22;\r\n\r\nimport { Soulbucks } from \"../Soulbucks.sol\";\r\n\r\n// @dev WARNING: This is for testing purposes only\r\ncontract SoulbucksMock is Soulbucks {\r\n    constructor(\r\n        string memory _name,\r\n        string memory _symbol,\r\n        address _lzEndpoint,\r\n        address _delegate\r\n    ) Soulbucks(_name, _symbol, _lzEndpoint, _delegate) {}\r\n\r\n    function mint(address _to, uint256 _amount) public {\r\n        _mint(_to, _amount);\r\n    }\r\n}\r\n"
     },
     "contracts/Soulbucks.sol": {
-      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.22;\r\n\r\n/*\r\n .----------------.  .----------------.  .----------------.  .----------------.  .----------------. \r\n| .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |\r\n| | ____    ____ | || |  ____  ____  | || |     ____     | || |  _________   | || |  _________   | |\r\n| ||_   \\  /   _|| || | |_  _||_  _| | || |   .'    `.   | || | |_   ___  |  | || | |  _   _  |  | |\r\n| |  |   \\/   |  | || |   \\ \\  / /   | || |  /  .--.  \\  | || |   | |_  \\_|  | || | |_/ | | \\_|  | |\r\n| |  | |\\  /| |  | || |    \\ \\/ /    | || |  | |    | |  | || |   |  _|      | || |     | |      | |\r\n| | _| |_\\/_| |_ | || |    _|  |_    | || |  \\  `--'  /  | || |  _| |_       | || |    _| |_     | |\r\n| ||_____||_____|| || |   |______|   | || |   `.____.'   | || | |_____|      | || |   |_____|    | |\r\n| |              | || |              | || |              | || |              | || |              | |\r\n| '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |\r\n '----------------'  '----------------'  '----------------'  '----------------'  '----------------' \r\n*/\r\n\r\nimport {Ownable} from \"@openzeppelin/contracts/access/Ownable.sol\";\r\nimport {OFT} from \"@layerzerolabs/oft-evm/contracts/OFT.sol\";\r\n\r\ncontract Soulbucks is OFT {\r\n    constructor(string memory _name, string memory _symbol, address _lzEndpoint, address _delegate)\r\n        OFT(_name, _symbol, _lzEndpoint, _delegate)\r\n        Ownable(_delegate)\r\n    {\r\n        _mint(0x86febB73a6e5aaf4aB0E656CcFD2F94883896378, 1_000_000_000 * 10 ** 18);\r\n    }\r\n}\r\n"
+      "content": "// SPDX-License-Identifier: MIT\r\npragma solidity ^0.8.22;\r\n\r\nimport { Ownable } from \"@openzeppelin/contracts/access/Ownable.sol\";\r\nimport { OFT } from \"@layerzerolabs/oft-evm/contracts/OFT.sol\";\r\n\r\ncontract Soulbucks is OFT {\r\n    constructor(\r\n        string memory _name,\r\n        string memory _symbol,\r\n        address _lzEndpoint,\r\n        address _delegate\r\n    ) OFT(_name, _symbol, _lzEndpoint, _delegate) Ownable(_delegate) {\r\n        _mint(_delegate, 1_000_000_000 * 1e18);\r\n    }\r\n}\r\n"
     }
   },
   "settings": {
@@ -141,7 +141,9 @@
           "storageLayout",
           "evm.gasEstimates"
         ],
-        "": ["ast"]
+        "": [
+          "ast"
+        ]
       }
     },
     "metadata": {
